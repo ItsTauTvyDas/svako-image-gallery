@@ -14,6 +14,7 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Pagrindinis')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Valdymo skydas') }}</flux:navlist.item>
+                    <flux:navlist.item icon="folder-arrow-down" :href="route('dashboard.data-report')" :current="request()->routeIs('dashboard.data-report')" :href="route('dashboard.data-report')" wire:navigate>{{ __('Ataskaita') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
