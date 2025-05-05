@@ -7,8 +7,8 @@
 
     <x-settings.layout>
         <flux:radio.group x-data variant="segmented" x-model="$flux.appearance">
-            <flux:radio value="light" icon="sun">{{ __('Šviesus') }}</flux:radio>
-            <flux:radio value="dark" icon="moon">{{ __('Tamsus') }}</flux:radio>
+            <flux:radio value="light" icon="sun">{{ __('Šviesi') }}</flux:radio>
+            <flux:radio value="dark" icon="moon">{{ __('Tamsi') }}</flux:radio>
             <flux:radio value="system" icon="computer-desktop">{{ __('Sistemos') }}</flux:radio>
         </flux:radio.group>
     </x-settings.layout>
