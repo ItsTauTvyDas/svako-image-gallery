@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Reset password')" :description="__('Please enter your new password below')" />
+    <x-auth-header :title="__('Atstatyti slaptažodį')" :description="__('Įveskite naują slaptažodį žemiau')" />
 
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
@@ -8,7 +8,7 @@
         <!-- Email Address -->
         <flux:input
             wire:model="email"
-            :label="__('Email')"
+            :label="__('El. paštas')"
             type="email"
             required
             autocomplete="email"
@@ -17,26 +17,26 @@
         <!-- Password -->
         <flux:input
             wire:model="password"
-            :label="__('Password')"
+            :label="__('Slaptažodis')"
             type="password"
             required
             autocomplete="new-password"
-            :placeholder="__('Password')"
+            :placeholder="__('Slaptažodis')"
         />
 
         <!-- Confirm Password -->
         <flux:input
             wire:model="password_confirmation"
-            :label="__('Confirm password')"
+            :label="__('Patvirtinkite slaptažodį')"
             type="password"
             required
             autocomplete="new-password"
-            :placeholder="__('Confirm password')"
+            :placeholder="__('Patvirtinkite slaptažodį')"
         />
 
         <div class="flex items-center justify-end">
             <flux:button type="submit" variant="primary" class="w-full">
-                {{ __('Reset password') }}
+                {{ __('Atstatyti slaptažodį') }}
             </flux:button>
         </div>
     </form>

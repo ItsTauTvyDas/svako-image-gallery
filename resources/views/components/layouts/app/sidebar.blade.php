@@ -12,16 +12,16 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                <flux:navlist.group :heading="__('Pagrindinis')" class="grid">
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Valdymo skydas') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Nustatymai')" class="grid">
                     <flux:navlist.item icon="user" :href="route('settings.profile')" :current="request()->routeIs('settings.profile')" wire:navigate>{{ __('Profilis') }}</flux:navlist.item>
-                    <flux:navlist.item icon="lock-closed" :href="route('settings.password')" :current="request()->routeIs('settings.password')" :href="route('settings.password')" wire:navigate>{{ __('Password') }}</flux:navlist.item>
-                    <flux:navlist.item icon="eye-dropper" :href="route('settings.appearance')" :current="request()->routeIs('settings.appearance')" :href="route('settings.appearance')" wire:navigate>{{ __('Appearance') }}</flux:navlist.item>
+                    <flux:navlist.item icon="lock-closed" :href="route('settings.password')" :current="request()->routeIs('settings.password')" :href="route('settings.password')" wire:navigate>{{ __('Slaptažodis') }}</flux:navlist.item>
+                    <flux:navlist.item icon="eye-dropper" :href="route('settings.appearance')" :current="request()->routeIs('settings.appearance')" :href="route('settings.appearance')" wire:navigate>{{ __('Išvaizda') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
@@ -60,7 +60,7 @@
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf
                         <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                            {{ __('Log Out') }}
+                            {{ __('Atsijungti') }}
                         </flux:menu.item>
                     </form>
                 </flux:menu>
@@ -104,7 +104,7 @@
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf
                         <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                            {{ __('Log Out') }}
+                            {{ __('Atsijungti') }}
                         </flux:menu.item>
                     </form>
                 </flux:menu>
