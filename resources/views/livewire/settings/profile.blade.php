@@ -1,7 +1,11 @@
 <section class="w-full">
-    @include('partials.settings-heading')
+    <div class="relative w-full">
+        <flux:heading size="xl" level="1">{{ __('Profilis') }}</flux:heading>
+        <flux:subheading size="lg" class="mb-6">{{ __('Update your name and email address') }}</flux:subheading>
+        <flux:separator variant="subtle" />
+    </div>
 
-    <x-settings.layout :heading="__('Profile')" :subheading="__('Update your name and email address')">
+    <x-settings.layout>
         <form wire:submit="updateProfileInformation" class="my-6 w-full space-y-6">
             <flux:input wire:model="name" :label="__('Name')" type="text" required autofocus autocomplete="name" />
 
