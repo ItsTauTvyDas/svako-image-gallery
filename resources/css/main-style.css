@@ -78,3 +78,7 @@
 .bd-mode-toggle .dropdown-menu .active .bi {
     display: block !important
 }
+
+.theme-transition, .theme-transition body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
