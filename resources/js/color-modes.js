@@ -70,10 +70,16 @@
         document.querySelectorAll('[data-bs-theme-value]')
             .forEach(toggle => {
                 toggle.addEventListener('click', () => {
+                    document.documentElement.classList.add('theme-transition')
+
                     const theme = toggle.getAttribute('data-bs-theme-value')
                     setStoredTheme(theme)
                     setTheme(theme)
                     showActiveTheme(theme, true)
+
+                    setTimeout(() => {
+                        document.documentElement.classList.remove('theme-transition');
+                    }, 300)
                 })
             })
     })
