@@ -15,7 +15,8 @@
 </svg>
 <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
     <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown">
-        <svg class="bi my-1 theme-icon-active" aria-hidden="true">
+        <span class="mb-1">{{ __('Išvaizda') }}</span>
+        <svg class="ms-2 me-1 bi my-1 theme-icon-active" aria-hidden="true">
             <use href="#circle-half"></use>
         </svg>
         <span class="visually-hidden" id="bd-theme-text">{{ __('Keisti išvaizdą') }}</span>
@@ -25,7 +26,9 @@
             <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
                 <svg class="bi me-2 opacity-50" aria-hidden="true">
                     <use href="#sun-fill"></use>
-                </svg> {{ __('Šviesi') }} <svg class="bi ms-auto d-none" aria-hidden="true">
+                </svg>
+                {{ __('Šviesi') }}
+                <svg class="bi ms-auto d-none" aria-hidden="true">
                     <use href="#check2"></use>
                 </svg>
             </button>
@@ -34,7 +37,9 @@
             <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
                 <svg class="bi me-2 opacity-50" aria-hidden="true">
                     <use href="#moon-stars-fill"></use>
-                </svg> {{ __('Tamsi') }} <svg class="bi ms-auto d-none" aria-hidden="true">
+                </svg>
+                {{ __('Tamsi') }}
+                <svg class="bi ms-auto d-none" aria-hidden="true">
                     <use href="#check2"></use>
                 </svg>
             </button>
@@ -43,7 +48,9 @@
             <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
                 <svg class="bi me-2 opacity-50" aria-hidden="true">
                     <use href="#circle-half"></use>
-                </svg> {{ __('Sistemos') }} <svg class="bi ms-auto d-none" aria-hidden="true">
+                </svg>
+                {{ __('Sistemos') }}
+                <svg class="bi ms-auto d-none" aria-hidden="true">
                     <use href="#check2"></use>
                 </svg>
             </button>
