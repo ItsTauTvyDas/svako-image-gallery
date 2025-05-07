@@ -1,14 +1,13 @@
 <?php
 
 use App\Livewire\Dashboard\AccountDataReport;
+use App\Livewire\Pages\Gallery;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('pages.main');
-})->name('home');
+Route::get('/', Gallery::class)->name('home');
 
 Route::prefix('dashboard')->group(function () {
     Route::view('/', 'dashboard')
