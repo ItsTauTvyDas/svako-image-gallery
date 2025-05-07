@@ -23,7 +23,7 @@
             type="email"
             required
             autocomplete="email"
-            placeholder="email@example.com"
+            placeholder="vardas.pavardenis@gmail.com"
         />
 
         <!-- Password -->
@@ -45,6 +45,17 @@
             autocomplete="new-password"
             :placeholder="__('Patvirtinkite slaptažodį')"
         />
+
+        <flux:select
+            wire:model="city_id"
+            :label="__('Miestas')"
+            required
+            autocomplete="new-password"
+            :placeholder="__('Miestas')">
+            @foreach($cities as $id => $name)
+                <flux:select.option :value="$id">{{ $name }}</flux:select.option>
+            @endforeach
+        </flux:select>
 
         <div class="flex items-center justify-end">
             <flux:button type="submit" variant="primary" class="w-full">
