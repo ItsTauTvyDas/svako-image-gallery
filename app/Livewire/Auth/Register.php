@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auth;
 
+use App\Models\City;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
@@ -14,12 +15,18 @@ use Livewire\Component;
 class Register extends Component
 {
     public string $name = '';
-
     public string $email = '';
-
     public string $password = '';
-
     public string $password_confirmation = '';
+    public string $city_id = '';
+    public bool $remember = false;
+
+    public array $cities;
+
+    public function mount(): void
+    {
+        $this->cities = City::all()->pluck('name', 'id')->sort()->toArray();
+    }
 
     /**
      * Handle an incoming registration request.
@@ -30,6 +37,7 @@ class Register extends Component
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'city_id' => ['required'],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
