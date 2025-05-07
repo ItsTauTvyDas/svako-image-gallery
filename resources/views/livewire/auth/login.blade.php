@@ -13,7 +13,7 @@
             required
             autofocus
             autocomplete="email"
-            placeholder="email@example.com"
+            placeholder="vardas.pavardenis@gmail.com"
         />
 
         <!-- Password -->

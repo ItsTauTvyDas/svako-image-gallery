@@ -12,14 +12,14 @@
             type="email"
             required
             autofocus
-            placeholder="vardas.vardenis@gmail.com"
+            placeholder="vardas.pavardenis@gmail.com"
         />
 
         <flux:button variant="primary" type="submit" class="w-full">{{ __('Siųsti slaptažodžio atkūrimo nuorodą el. paštu') }}</flux:button>
     </form>
 
     <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-400">
-        {{ __('Or, return to') }}
+        {{ __('Arba') }}
         <flux:link :href="route('login')" wire:navigate>{{ __('prisijungti') }}</flux:link>
     </div>
 </div>
