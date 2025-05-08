@@ -79,6 +79,8 @@
     display: block !important
 }
 
+/* Galerija */
+
 .theme-transition, .theme-transition body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -88,4 +90,25 @@
     background-size: 115%;
     background-repeat: no-repeat;
     background-position: -225px center;
+}
+
+.post-transition {
+    transition: transform .5s;
+}
+
+.post-transition:hover {
+    transform: scale(1.025);
+}
+
+.post-hidden-card-body {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity .5s ease-out, background-color .5s ease-out;
+}
+
+.post-transition:hover .post-hidden-card-body {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.5);
 }
