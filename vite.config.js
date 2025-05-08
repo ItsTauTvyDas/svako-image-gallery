@@ -11,14 +11,18 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/bootstrap.min.css',
                 'resources/css/main-style.css',
-                'resources/js/bootstrap.bundle.min.js',
                 'resources/js/app.js',
                 'resources/js/color-modes.js',
             ],
-            refresh: [`resources/views/**/*`],
+            refresh: true,
         }),
         tailwindcss(),
     ],
+    resolve: {
+        alias: {
+            '$':  'jQuery',
+        },
+    },
     server: {
         cors: true,
     },
