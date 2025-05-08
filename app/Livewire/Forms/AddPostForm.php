@@ -15,17 +15,25 @@ class AddPostForm extends Form
     #[Validate('min:5|max:500')]
     public $content = '';
 
-    #[Validate('image|max:25600')]
-    public TemporaryUploadedFile $photo;
+    #[Validate('required|boolean')]
+    public bool $acceptedRules = false;
 
-    public function store(): void
+    #[Validate('required|image|max:25600')]
+    public ?TemporaryUploadedFile $photo;
+
+    public function store(): bool
     {
+        if (!$this->acceptedRules) {
+            $this->addError('acceptedRules', __('Turite sutikti su taisyklėmis!'));
+            return false;
+        }
+
         $this->validate();
 
-        $path = $this->photo->storePublicly(path: 'photos');
+        $path = $this->photo->store('photos', ['disk' => 'public', 'visibility' => 'public']);
         if ($path === false) {
-            $this->addError('photo', 'Atsitiko klaida ir nuotraukos įkelti nepavyko!');
-            return;
+            $this->addError('photo', __('Atsitiko klaida ir nuotraukos įkelti nepavyko!'));
+            return false;
         }
 
         Post::create([
@@ -34,5 +42,6 @@ class AddPostForm extends Form
             'image_url' => $path,
             'user_id' => auth()->id()
         ]);
+        return true;
     }
 }

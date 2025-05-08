@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -16,12 +17,8 @@ class Gallery extends Component
     use WithPagination, WithFileUploads;
 
     public AddPostForm $addPostForm;
-
+    #[Url(as: 'q', except: '')]
     public $search = '';
-
-    protected $listeners = [
-        'UpdateGallery' => '$refresh'
-    ];
 
     public function updatingSearch(): void
     {
@@ -30,15 +27,16 @@ class Gallery extends Component
 
     public function addPost(): void
     {
-        $this->addPostForm->store();
-        $this->dispatch('UpdateGallery');
+        if ($this->addPostForm->store())
+            $this->redirect('/');
     }
 
     public function render(): View|Application|Factory|\Illuminate\View\View
     {
+        $search = preg_replace('/\s+/', '%', $this->search);
+
         return view('livewire.pages.gallery', [
-            'posts' => Post::where('title', 'like', '%'.$this->search.'%')
-                ->where('content', 'like', '%'.$this->search.'%')
+            'posts' => Post::whereRaw("title || content LIKE ?", ["%$search%"])
                 ->paginate(18),
         ])->layout('components.layouts.app.page');
     }
