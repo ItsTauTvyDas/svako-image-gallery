@@ -6,15 +6,17 @@
                     <div class="card-body">
                         <h1 class="fw-light">{{ __('Nuotraukų Galerija') }}</h1>
                         <p class="lead text-body-secondary mb-5">{{ __('Dalinkis savo nuotraukomis su kitais!') }}</p>
-                        <form>
-                            <div class="text-center mt-5">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">{{ __('Paieška') }}</span>
-                                    <input type="text" wire:model="search" class="form-control">
-                                    <button type="submit" class="btn btn-primary">{{ __('Filtrai') }}</button>
-                                </div>
+                        <div class="text-center mt-5">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <flux:icon.magnifying-glass variant="mini" class="d-inline me-2"/>{{ __('Paieška') }}
+                                </span>
+                                <input type="text" wire:model.live="search" class="form-control">
+                                <button type="submit" class="btn btn-primary">
+                                    <flux:icon.funnel variant="mini" class="d-inline me-2"/>{{ __('Filtrai') }}
+                                </button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -45,32 +47,32 @@
                     </div>
                 </div>
             @else
+                <div class="mb-3">
+                    {{ $posts->links(data: ['scrollTo' => false]) }}
+                </div>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     @foreach ($posts as $post)
-                        <div class="col">
-                            <div class="card shadow-sm">
-                                <img class="bd-placeholder-img card-img-top"
-                                     height="225" width="100%"
-                                     src="{{ asset('storage/' . $post->image_url) }}">
-                                <div class="card-body">
-                                    <h2>{{ $post->title }}</h2>
-                                    <p class="card-text">{{ $post->content }}</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                        </div>
-                                        <div>
-                                            <small class="text-body-secondary d-block">{{ $post->author()->name }}</small>
-                                            <small class="text-body-secondary">{{ $post->created_at }}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @php($position = 'start') {{-- pirma --}}
+                        @if($loop->iteration % 3 == 0) {{-- paskutine --}}
+                            @php($position = 'end')
+                        @elseif($loop->iteration % 2 == 0) {{-- vidurine --}}
+                            @php($position = 'middle')
+                        @endif
+                        @push("gallery-posts-$position")
+                            <x-layouts.app.gallery.post :post="$post"/>
+                        @endpush
                     @endforeach
+                    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                        @stack('gallery-posts-start')
+                    </div>
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        @stack('gallery-posts-middle')
+                    </div>
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        @stack('gallery-posts-end')
+                    </div>
                 </div>
-                <div>
+                <div class="mt-3">
                     {{ $posts->links() }}
                 </div>
             @endif
@@ -79,7 +81,7 @@
     <div wire:ignore.self class="modal fade" id="addPostModal" tabindex="-1" aria-labelledby="addPostModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form wire:submit.prevent="addPost">
+                <form wire:submit="addPost">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="addPostModalLabel">{{ __('Įkelti nuotrauką') }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -106,6 +108,19 @@
                                 <div class="form-text text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" wire:model="addPostForm.acceptedRules" id="postAcceptRules">
+                            <label class="form-check-label" for="postAcceptRules">
+                                <span>
+                                    {{ __('Patvirtinkite, jog perskaitėte nuotraukų įkėlimų') }}
+                                </span> <a target="_blank" href="{{ route('upload-rules') }}">
+                                    {{ __('taisykles') }}
+                                </a>
+                            </label>
+                            @error('addPostForm.acceptedRules')
+                                <div class="form-text text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Uždaryti') }}</button>
@@ -115,4 +130,13 @@
             </div>
         </div>
     </div>
+    @once
+        @push('footer-scripts')
+            <script type="module">
+                Livewire.on('postAdded', () => {
+                    $('#addPostModal').modal('hide');
+                });
+            </script>
+        @endpush
+    @endonce
 </main>
