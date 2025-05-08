@@ -8,16 +8,15 @@
 
 @vite([
     'resources/css/app.css',
-    'resources/js/app.js',
+    'resources/js/app.js'
 ])
 
 @if (!request()->is('dashboard*') && !request()->is('system/*'))
     @vite([
         'resources/css/bootstrap.min.css',
-        'resources/js/color-modes.js',
         'resources/css/main-style.css',
-        'resources/js/bootstrap.bundle.min.js'
     ])
 @endif
 
+@stack('head-scripts')
 @fluxAppearance
