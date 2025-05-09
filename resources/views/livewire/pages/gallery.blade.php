@@ -95,14 +95,17 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="postContent" class="form-label">{{ __('Aprašas (nebūtinas)') }}</label>
-                            <textarea maxlength="500" class="form-control" wire:model="addPostForm.content" id="postContent"></textarea>
-                            @error('addPostForm.postContent')
+                            <label for="postContent" class="form-label">{{ __('Aprašas') }} <em>{{ __('(nebūtina)') }}</em></label>
+                            <textarea maxlength="500"
+                                      style="min-height: 200px; max-height: 500px"
+                                      class="form-control" wire:model="addPostForm.content"
+                                      id="postContent"></textarea>
+                            @error('addPostForm.content')
                                 <div class="form-text text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="postContent" class="form-label">{{ __('Įkelkite nuotrauką') }}</label>
+                            <label for="postPhoto" class="form-label">{{ __('Įkelkite nuotrauką') }}</label>
                             <input type="file" class="form-control" wire:model="addPostForm.photo" id="postPhoto">
                             @error('addPostForm.photo')
                                 <div class="form-text text-danger">{{ $message }}</div>
@@ -123,7 +126,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Uždaryti') }}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" wire:click="clearErrors">{{ __('Uždaryti') }}</button>
                         <button type="submit" class="btn btn-primary">{{ __('Įkelti') }}</button>
                     </div>
                 </form>
