@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 /**
  * @method static where(string $string, string $string1, string $string2)
  * @method static whereRaw(string $string, string[] $array)
+ * @method static withCount(string[] $array)
  */
 class Post extends Model
 {
