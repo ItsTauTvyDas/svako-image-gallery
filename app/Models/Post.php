@@ -35,8 +35,10 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
-    protected static function booted(): void
+    protected static function boot(): void
     {
+        parent::boot();
+
         static::deleting(function (Post $post) {
             if ($post->image_url)
                 Storage::disk('public')->delete($post->image_url);
