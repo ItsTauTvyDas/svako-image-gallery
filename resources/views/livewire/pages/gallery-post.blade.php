@@ -96,6 +96,7 @@
                         @if($commentCount == 0)
                             <smal><em>{{ __('Nieko nėra.') }}</em></smal>
                         @else
+                            {{ $comments->links() }}
                             <div class="d-flex flex-column gap-2">
                                 @foreach($comments as $comment)
                                     <div class="card card-body d-flex flex-column">
@@ -129,6 +130,7 @@
                                     </div>
                                 @endforeach
                             </div>
+                            {{ $comments->links() }}
                         @endif
                     </form>
                 </div>

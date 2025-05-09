@@ -10,10 +10,11 @@ use App\Traits\AuthOnlyComponentAction;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Livewire\WithPagination;
 
 class GalleryPost extends UserProfile
 {
-    use AuthOnlyComponentAction;
+    use AuthOnlyComponentAction, WithPagination;
 
     public ?Post $post;
     public bool $liked = false;
@@ -123,7 +124,7 @@ class GalleryPost extends UserProfile
     public function render(): View|Application|Factory|\Illuminate\View\View
     {
         return view('livewire.pages.gallery-post', [
-            'comments' => $this->post->comments()->with('author')->get()->sortByDesc('created_at'),
+            'comments' => $this->post->comments()->with('author')->orderBy('created_at', 'desc')->paginate(20),
         ])->layout('components.layouts.app.page');
     }
 }
