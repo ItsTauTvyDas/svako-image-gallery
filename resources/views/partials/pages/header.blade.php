@@ -13,9 +13,6 @@
             <li>
                 <a href="{{ route('upload-rules') }}" @class(['nav-link px-2', 'link-secondary' => request()->routeIs('upload-rules')])>{{ __('Taisyklės') }}</a>
             </li>
-            <li>
-                <a href="#" class="nav-link px-2">{{ __('Apie') }}</a>
-            </li>
         </ul>
         <div class="col-md-3 text-end">
             @auth
