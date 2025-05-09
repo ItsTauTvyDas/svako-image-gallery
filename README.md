@@ -28,5 +28,6 @@
     * Nuotraukos peržiūra prieš įkeliant
 * Viešos paskyros
   * Sekimas
+  * Papildomi mygtukai jeigu vartotojas žiūri savo paskyrą
   * Registracijos ir paskyros keitimo laikai
   * Paprasta statistika apie vartotoją (kiek sekėjų, komentarų, seka, koks miestas)
