@@ -12,9 +12,6 @@
                                     <flux:icon.magnifying-glass variant="mini" class="d-inline me-2"/>{{ __('Paieška') }}
                                 </span>
                                 <input type="text" wire:model.live="search" class="form-control">
-                                <button type="submit" class="btn btn-primary">
-                                    <flux:icon.funnel variant="mini" class="d-inline me-2"/>{{ __('Filtrai') }}
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -111,6 +108,14 @@
                                 <div class="form-text text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        @if (isset($addPostForm->photo))
+                            <div class="mb-3">
+                                <label for="postPhoto" class="form-label">{{ __('Nuotraukos peržiūra') }}</label>
+                                <div class="d-flex text-center">
+                                    <img alt="peržiūra" src="{{ $addPostForm->photo->temporaryUrl() }}">
+                                </div>
+                            </div>
+                        @endif
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" wire:model="addPostForm.acceptedRules" id="postAcceptRules">
                             <label class="form-check-label" for="postAcceptRules">
