@@ -31,7 +31,7 @@ class GalleryPost extends UserProfile
         $this->post = Post::find($id);
         if ($this->post == null)
             abort(404);
-        $this->user = $this->post->author();
+        parent::mount($this->post->user_id);
         $this->editPostForm->fill($this->post->only(['title', 'content']));
         if (auth()->check())
             $this->liked = auth()->user()->haveLikedPost($this->post);
