@@ -25,5 +25,4 @@ class NewFollowerMail extends Mailable
             ->subject(__('Naujas sekėjas!'))
             ->text('emails.new-follower');
     }
-
 }
