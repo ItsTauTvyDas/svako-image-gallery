@@ -31,3 +31,6 @@
   * Papildomi mygtukai jeigu vartotojas žiūri savo paskyrą
   * Registracijos ir paskyros keitimo laikai
   * Paprasta statistika apie vartotoją (kiek sekėjų, komentarų, seka, koks miestas)
+
+ ![image](https://github.com/user-attachments/assets/f2b43ac0-17a0-4c0f-b026-654d28060c94)
+
