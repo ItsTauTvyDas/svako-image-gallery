@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PDFController;
 use App\Livewire\Dashboard\AccountDataReport;
 use App\Livewire\Pages\Gallery;
 use App\Livewire\Pages\GalleryPost;
@@ -17,6 +18,12 @@ Route::middleware(['verified'])->group(function () {
     Route::get('/users', Users::class)->name('users-list');
     Route::get('/users/{id}', UserProfile::class)->name('profile');
     Route::get('/gallery/posts/{id}', GalleryPost::class)->name('gallery-post');
+
+    Route::prefix('dashboard/data-report/pdf')->group(function () {
+        Route::get('html-preview', [PDFController::class, 'HTMLPreview'])->name('pdf.preview.html');
+        Route::get('file-preview', [PDFController::class, 'preview'])->name('pdf.preview.file');
+        Route::get('download', [PDFController::class, 'download'])->name('pdf.download');
+    });
 });
 
 Route::prefix('dashboard')->group(function () {
