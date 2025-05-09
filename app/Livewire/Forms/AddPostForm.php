@@ -37,8 +37,8 @@ class AddPostForm extends Form
         }
 
         Post::create([
-            'title' => $this->title,
-            'content' => $this->content,
+            'title' => htmlspecialchars($this->title),
+            'content' => htmlspecialchars($this->content),
             'image_url' => $path,
             'user_id' => auth()->id()
         ]);
