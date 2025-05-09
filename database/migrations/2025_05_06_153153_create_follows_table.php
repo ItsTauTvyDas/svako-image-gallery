@@ -16,7 +16,8 @@ return new class extends Migration
                   ->constrained('users')
                   ->cascadeOnDelete();
             $table->primary(['following_user_id', 'followed_user_id']);
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')
+                  ->useCurrent();;
         });
     }
 
