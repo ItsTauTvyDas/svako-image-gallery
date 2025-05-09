@@ -10,15 +10,16 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Pagrindinis')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Valdymo skydas') }}</flux:navlist.item>
-                    <flux:navlist.item icon="folder-arrow-down" :href="route('dashboard.data-report')" :current="request()->routeIs('dashboard.data-report')" :href="route('dashboard.data-report')" wire:navigate>{{ __('Ataskaita') }}</flux:navlist.item>
+                    <flux:navlist.item icon="folder-arrow-down" :href="route('dashboard.data-report')" :current="request()->routeIs('dashboard.data-report')" wire:navigate>{{ __('Ataskaita') }}</flux:navlist.item>
+                    <flux:navlist.item icon="user" :href="route('profile', ['id' => auth()->id()])">{{ __('Viešas profilis') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Nustatymai')" class="grid">
                     <flux:navlist.item icon="user" :href="route('settings.profile')" :current="request()->routeIs('settings.profile')" wire:navigate>{{ __('Profilis') }}</flux:navlist.item>
-                    <flux:navlist.item icon="lock-closed" :href="route('settings.password')" :current="request()->routeIs('settings.password')" :href="route('settings.password')" wire:navigate>{{ __('Slaptažodis') }}</flux:navlist.item>
-                    <flux:navlist.item icon="eye-dropper" :href="route('settings.appearance')" :current="request()->routeIs('settings.appearance')" :href="route('settings.appearance')" wire:navigate>{{ __('Išvaizda') }}</flux:navlist.item>
+                    <flux:navlist.item icon="lock-closed" :href="route('settings.password')" :current="request()->routeIs('settings.password')" wire:navigate>{{ __('Slaptažodis') }}</flux:navlist.item>
+                    <flux:navlist.item icon="eye-dropper" :href="route('settings.appearance')" :current="request()->routeIs('settings.appearance')" wire:navigate>{{ __('Išvaizda') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
