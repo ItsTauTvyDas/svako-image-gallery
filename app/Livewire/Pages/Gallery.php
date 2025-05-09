@@ -17,6 +17,7 @@ class Gallery extends Component
     use WithPagination, WithFileUploads;
 
     public AddPostForm $addPostForm;
+
     #[Url(as: 'q', except: '')]
     public $search = '';
 
@@ -27,8 +28,16 @@ class Gallery extends Component
 
     public function addPost(): void
     {
-        if ($this->addPostForm->store())
-            $this->redirect('/');
+        if ($this->addPostForm->store()) {
+            $this->dispatch('bootstrapCloseModal', 'addPostModal');
+            $this->clearErrors();
+        }
+    }
+
+    public function clearErrors(): void
+    {
+        $this->addPostForm->reset();
+        $this->addPostForm->resetValidation();
     }
 
     public function render(): View|Application|Factory|\Illuminate\View\View
@@ -36,8 +45,25 @@ class Gallery extends Component
         $search = preg_replace('/\s+/', '%', $this->search);
 
         return view('livewire.pages.gallery', [
-            'posts' => Post::whereRaw("title || content LIKE ?", ["%$search%"])
-                ->paginate(18),
+            'posts' => Post::withCount(['comments', 'likes'])
+                         ->select('posts.*')
+                         ->selectRaw("
+                             posts.*,
+                             (
+                               (
+                                 (SELECT COUNT(*) FROM post_comments  WHERE post_comments.post_id = posts.id)
+                                 +
+                                 (SELECT COUNT(*) FROM post_likes     WHERE post_likes.post_id    = posts.id)
+                               )
+                               /
+                               (
+                                 (julianday('now') - julianday(created_at)) + 1
+                               )
+                             ) AS popularity_score
+                         ")
+                         ->whereRaw("(title || ' ' || content) LIKE ?", ["%$search%"])
+                         ->orderByDesc('popularity_score')
+                         ->paginate(20),
         ])->layout('components.layouts.app.page');
     }
 }
