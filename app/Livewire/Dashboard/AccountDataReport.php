@@ -15,7 +15,7 @@ class AccountDataReport extends Component
         $loggedInUser = auth()->user();
         // 1 request'as per 5 min
         $status = RateLimiter::attempt(
-            "send-account-data-report00:$loggedInUser->id",
+            "send-account-data-report:$loggedInUser->id",
             1,
             function () use ($loggedInUser) {
                 Mail::to($loggedInUser->email)->send(new SendDataReportMail($loggedInUser, PDFController::getData()));
