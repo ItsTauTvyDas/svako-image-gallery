@@ -1,13 +1,16 @@
-<?php /** @noinspection DuplicatedCode */
+<?php
 
 namespace App\Livewire\Pages;
 
+use App\Mail\NewFollowerMail;
 use App\Models\User;
 use App\Traits\AuthOnlyComponentAction;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
+use RateLimiter;
 
 class UserProfile extends Component
 {
@@ -36,6 +39,13 @@ class UserProfile extends Component
                 'created_at' => now()
             ]);
             $this->isFollowing = true;
+            // 1 request'as per 5 min
+            RateLimiter::attempt(
+                "send-new-follower-email:{$this->user->id}:$loggedInUser->id",
+                1,
+                fn () => Mail::to($this->user->email)->send(new NewFollowerMail($this->user, $loggedInUser)),
+                60 * 5
+            );
         }
     }
 
