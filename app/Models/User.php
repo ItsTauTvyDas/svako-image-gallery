@@ -61,6 +61,11 @@ class User extends Authenticatable implements MustVerifyEmail
             ->implode('');
     }
 
+    public function isMe(): bool
+    {
+        return auth()->check() && auth()->user()->id === $this->id;
+    }
+
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
@@ -81,6 +86,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(PostLike::class);
     }
 
+    public function haveLikedPost(Post $post): bool
+    {
+        return $this->postLikes()
+                    ->where('post_id', $post->id)
+                    ->exists();
+    }
+
     public function following(): HasMany
     {
         return $this->hasMany(UserFollow::class, 'following_user_id');
@@ -96,5 +108,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->following()
             ->where('followed_user_id', $user->getKey())
             ->exists();
+    }
+
+    public function profileUrl(): string
+    {
+        return asset('storage/default/profile-picture.jpg');
     }
 }
