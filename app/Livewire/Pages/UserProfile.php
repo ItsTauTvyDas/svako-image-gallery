@@ -1,36 +1,39 @@
-<?php
+<?php /** @noinspection DuplicatedCode */
 
 namespace App\Livewire\Pages;
 
 use App\Models\User;
+use App\Traits\AuthOnlyComponentAction;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Livewire\Component;
 
-class Profile extends Component
+class UserProfile extends Component
 {
+    use AuthOnlyComponentAction;
+
     public ?User $user;
-    public bool $isFollowing;
+    public bool $isFollowing = false;
 
     public function mount(int $id): void
     {
-        $this->user        = User::find($id);
+        $this->user = User::find($id);
+        if ($this->user == null)
+            abort(404);
         if (auth()->check())
             $this->isFollowing = auth()->user()->isFollowing($this->user);
     }
 
     public function follow(): void
     {
-        if (!auth()->check())
-            return;
         $loggedInUser = auth()->user();
         if ($loggedInUser->id === $this->user->id)
             return;
         if (!$loggedInUser->isFollowing($this->user)) {
-            auth()->user()->following()->create([
+            $loggedInUser->following()->create([
                 'followed_user_id' => $this->user->id,
-                'created_at'       => now(),
+                'created_at' => now()
             ]);
             $this->isFollowing = true;
         }
@@ -38,16 +41,15 @@ class Profile extends Component
 
     public function unfollow(): void
     {
-        if (!auth()->check())
-            return;
-        auth()->user()->following()
-                   ->where('followed_user_id', $this->user->id)
-                   ->delete();
+        $loggedInUser = auth()->user();
+        $loggedInUser->following()
+                     ->where('followed_user_id', $this->user->id)
+                     ->delete();
         $this->isFollowing = false;
     }
 
     public function render(): View|Application|Factory|\Illuminate\View\View
     {
-        return view('livewire.pages.profile')->layout('components.layouts.app.page');
+        return view('livewire.pages.user-profile')->layout('components.layouts.app.page');
     }
 }
