@@ -18,8 +18,8 @@
                                 <h5>{{ $user->name }}</h5>
                                 <div class="d-flex justify-content-between gap-2">
                                     @if($user->isMe())
-                                        <a href="{{ route('dashboard') }}" class="btn btn-outline-light">{{ __('Valdymo skydas') }}</a>
-                                        <a href="{{ route('settings.profile') }}" class="btn btn-outline-light">{{ __('Nustatymai') }}</a>
+                                        <a href="{{ route('dashboard') }}" class="btn btn-outline-primary">{{ __('Valdymo skydas') }}</a>
+                                        <a href="{{ route('settings.profile') }}" class="btn btn-outline-primary">{{ __('Nustatymai') }}</a>
                                     @endif
                                     <x-layouts.app.user.follow-button
                                         :isFollowing="$isFollowing"

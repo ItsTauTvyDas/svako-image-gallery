@@ -9,24 +9,24 @@
         @endpush
     </a>
     <div class="card-body post-hidden-card-body">
-        <h3 class="text-truncate pb-1">{{ $post->title }}</h3>
+        <h3 class="text-truncate pb-1 text-light">{{ $post->title }}</h3>
         <div class="overflow-hidden">
-            <p class="card-text text-truncate">{{ $post->content }}</p>
+            <p class="card-text text-truncate text-light">{{ $post->content }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex flex-column">
-                <div>
+                <div class="text-light">
                     <flux:icon.hand-thumb-up class="d-inline me-2"/>{{ $post->likeCount() }}
                 </div>
-                <div>
+                <div class="text-light">
                     <flux:icon.chat-bubble-bottom-center-text class="d-inline me-2"/>{{ $post->comments()->count() }}
                 </div>
             </div>
             <div class="d-flex flex-column">
-                <small class="text-body-secondary">
+                <small class="text-light">
                     <a href="{{ route('profile', $post->author()->id) }}">{{ $post->author()->name }}</a>
                 </small>
-                <small class="text-body-secondary">
+                <small class="text-light">
                     {{ $post->created_at }}
                 </small>
             </div>

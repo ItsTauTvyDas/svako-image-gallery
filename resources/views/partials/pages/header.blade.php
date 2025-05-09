@@ -17,7 +17,7 @@
         <div class="col-md-3 text-end">
             @auth
                 <div class="dropdown">
-                    <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <flux:icon.user variant="mini" class="d-inline"/> {{ auth()->user()->name }}
                     </button>
                     <ul class="dropdown-menu">
