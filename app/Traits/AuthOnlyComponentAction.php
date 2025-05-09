@@ -8,7 +8,5 @@ trait AuthOnlyComponentAction
     {
         if (!auth()->check())
             abort(403);
-        elseif (!auth()->user()->hasVerifiedEmail())
-            redirect(route('verification.notice'));
     }
 }
