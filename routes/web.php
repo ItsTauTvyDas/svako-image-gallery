@@ -11,11 +11,13 @@ use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', Gallery::class)->name('home');
-Route::get('/upload-rules', UploadRules::class)->name('upload-rules');
-Route::get('/users', Users::class)->name('users-list');
-Route::get('/users/{id}', UserProfile::class)->name('profile');
-Route::get('/gallery/posts/{id}', GalleryPost::class)->name('gallery-post');
+Route::middleware(['verified'])->group(function () {
+    Route::get('/', Gallery::class)->name('home');
+    Route::get('/upload-rules', UploadRules::class)->name('upload-rules');
+    Route::get('/users', Users::class)->name('users-list');
+    Route::get('/users/{id}', UserProfile::class)->name('profile');
+    Route::get('/gallery/posts/{id}', GalleryPost::class)->name('gallery-post');
+});
 
 Route::prefix('dashboard')->group(function () {
     Route::view('/', 'dashboard')
