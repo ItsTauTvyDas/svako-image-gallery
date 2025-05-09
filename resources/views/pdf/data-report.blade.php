@@ -54,15 +54,23 @@
         </tr>
         <tr>
             <th>Sekėjai</th>
-            <th>{{ $user->followers()->count() }}</th>
+            <th>{{ $user->followers_count }}</th>
         </tr>
         <tr>
             <th>Seka</th>
-            <th>{{ $user->following()->count() }}</th>
+            <th>{{ $user->following_count }}</th>
         </tr>
         <tr>
             <th>Komentarai</th>
-            <th>{{ $user->comments()->count() }}</th>
+            <th>{{ $user->comments_count }}</th>
+        </tr>
+        <tr>
+            <th>Patiktukai</th>
+            <th>{{ $user->post_likes_count }}</th>
+        </tr>
+        <tr>
+            <th>Miestas</th>
+            <th>{{ $user->city->name }}</th>
         </tr>
     </table>
     <p>Sukurtų įrašų lentelė:</p>

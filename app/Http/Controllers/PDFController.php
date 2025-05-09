@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class PDFController extends Controller
@@ -12,7 +13,9 @@ class PDFController extends Controller
 
     public static function getData(): array
     {
-        $user = auth()->user();
+        $user = User::withCount(['comments', 'followers', 'following', 'posts', 'postLikes'])
+                    ->with('city')
+                    ->find(auth()->id());
         return [
             'title' => "Vartotojo $user->name paskyros duomenų ataskaita",
             'date' => date('Y-m-d h:m'),
