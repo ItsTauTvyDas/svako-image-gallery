@@ -21,7 +21,7 @@ class UserProfile extends Component
 
     public function mount(int $id): void
     {
-        $this->user = User::find($id);
+        $this->user = User::with(['city'])->find($id);
         if ($this->user == null)
             abort(404);
         if (auth()->check())

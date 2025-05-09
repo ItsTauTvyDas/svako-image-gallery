@@ -44,6 +44,10 @@
                                     <p class="small text-muted mb-1">{{ __('Seka') }}</p>
                                     <p class="mb-0">{{ $user->following->count() }}</p>
                                 </div>
+                                <div>
+                                    <p class="small text-muted mb-1">{{ __('Miestas') }}</p>
+                                    <p class="mb-0">{{ $user->city->name }}</p>
+                                </div>
                             </div>
                             <div class="absolute bottom-0 left-0">
                                 <p class="m-0">{{ __('Profilis atnaujintas') }}</p>
