@@ -2,17 +2,20 @@
 
 use App\Livewire\Dashboard\AccountDataReport;
 use App\Livewire\Pages\Gallery;
+use App\Livewire\Pages\GalleryPost;
 use App\Livewire\Pages\UploadRules;
-use App\Livewire\Pages\Profile;
+use App\Livewire\Pages\UserProfile;
 use App\Livewire\Pages\Users;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
+use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Gallery::class)->name('home');
 Route::get('/upload-rules', UploadRules::class)->name('upload-rules');
 Route::get('/users', Users::class)->name('users-list');
-Route::get('/users/{id}', Profile::class)->name('profile');
+Route::get('/users/{id}', UserProfile::class)->name('profile');
+Route::get('/gallery/posts/{id}', GalleryPost::class)->name('gallery-post');
 
 Route::prefix('dashboard')->group(function () {
     Route::view('/', 'dashboard')
