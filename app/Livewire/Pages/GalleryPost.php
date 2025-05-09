@@ -115,15 +115,6 @@ class GalleryPost extends UserProfile
         }
     }
 
-    public function deleteComment(): void
-    {
-        if (auth()->id() === $this->user->id) {
-            $this->commentForm->delete($this->post);
-            $this->commentForm->reset();
-            $this->clearErrors();
-        }
-    }
-
     public function clearErrors(): void
     {
         $this->resetValidation();
